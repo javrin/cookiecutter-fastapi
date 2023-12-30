@@ -1,23 +1,27 @@
 import os
 import re
+import shutil
 import subprocess  # noqa
+from datetime import datetime
+from fnmatch import fnmatch
 
 
 def build_files_list(root_dir):
     """Build a list containing absolute paths to the generated files."""
-    return [
-        os.path.join(dirpath, file_path)
-        for dirpath, _, files in os.walk(root_dir)
-        for file_path in files
-    ]
+    return [os.path.join(dirpath, file_path) for dirpath, _, files in os.walk(root_dir) for file_path in files]
+
+
+def test_make_accessible():
+    executable = shutil.which("make")
+    assert executable is not None
 
 
 def test_run_cookiecutter_result(cookies):
     """Runs cookiecutter and checks a couple of things"""
-    project_name = "sancho panza"
-    mastodon_url = "john"
+    project_name = "sancho-panza"
+    email = "don@quixote.com"
     result = cookies.bake(
-        extra_context={"project_name": project_name, "mastodon_url": mastodon_url}
+        extra_context={"project_name": project_name, "email": email, "timestamp": datetime.utcnow().isoformat()}
     )
 
     assert result.exit_code == 0
@@ -30,7 +34,7 @@ def test_run_cookiecutter_result(cookies):
 
     with open(readme_path, "r") as f:
         readme = f.read()
-        assert mastodon_url in readme
+        assert email in readme
         assert project_name in readme
         assert "project_name" not in readme
 
@@ -40,24 +44,22 @@ def test_cookiecutter_generated_files(cookies):
     re_bad = re.compile(r"{{\s?cookiecutter\..*?}}")
     result = cookies.bake()
 
-    assert all(
-        re_bad.search(str(file_path)) is None
-        for file_path in result.project_path.glob("*")
-    )
+    assert all(re_bad.search(str(file_path)) is None for file_path in result.project_path.glob("*"))
 
 
 def test_cookiecutter_make_qa(cookies):
     """runs tests on the generated dir"""
     result = cookies.bake()
+    executable = shutil.which("make")
 
     make_proc = subprocess.Popen(
-        ["/usr/bin/make", "qa"],
+        [executable, "qa"],
         shell=False,  # noqa
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         cwd=result.project_path,
     )
-    # stdout, stderr are for debuggin
+    # stdout, stderr are for debugging
     stdout, stderr = make_proc.communicate()
     assert make_proc.returncode == 0
 
@@ -69,29 +71,27 @@ def test_cookiecutter_env_file(cookies):
     env_path = result.project_path / ".env"
     assert env_path.is_file()
 
-    with open(env_path, "r") as f:
-        file_content = f.read()
-        assert f"={result.project_path}\n" in file_content
-
     env_path = result.project_path / ".vscode/settings.json"
     assert env_path.is_file()
 
     with open(env_path, "r") as f:
         file_content = f.read()
         assert "<interpreter_path>" not in file_content
+        assert '"python.envFile": "${workspaceFolder}/.env"' in file_content
 
 
 def test_python_installation(cookies):
     """tests the poetry installation scripts"""
     result = cookies.bake()
 
-    make_proc = subprocess.Popen(
-        ["/usr/bin/which", "python"],
+    python_proc = subprocess.Popen(
+        ["poetry", "env", "info", "--executable"],
         shell=False,  # noqa
         stdout=subprocess.PIPE,
         stderr=subprocess.STDOUT,
         cwd=result.project_path,
+        text=True,
     )
-    stdout, stderr = make_proc.communicate()
-    assert make_proc.returncode == 0
-    assert "pypoetry/virtualenvs" in str(stdout)
+    stdout, stderr = python_proc.communicate()
+    assert python_proc.returncode == 0
+    assert fnmatch(str(stdout), "*pypoetry*virtualenvs*")

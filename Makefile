@@ -1,4 +1,4 @@
-PYTHON_VERSION ?= 3.10.4
+PYTHON_VERSION ?= 3.10.11
 CMD := poetry run
 SRC_DIR := hooks
 TESTS_DIR := tests
@@ -12,19 +12,19 @@ format: ## rewrites code with black and isort
 	$(CMD) isort $(SRC_DIR) $(TESTS_DIR)
 .PHONY: format
 
-lint-black: ## checks src and tests with mypy
+lint-black: ## checks src and tests with black
 	$(CMD) black --check --fast $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-black
 
-lint-flake: ## checks src and tests with mypy
-	$(CMD) flakeheaven lint $(SRC_DIR) $(TESTS_DIR)
-.PHONY: lint-flake
+lint-ruff: ## checks src and tests with ruff
+	$(CMD) ruff check $(SRC_DIR) $(TESTS_DIR)
+.PHONY: lint-ruff
 
 lint-mypy: ## checks type annotation
 	$(CMD) mypy $(SRC_DIR)
 .PHONY: lint-mypy
 
-lint: lint-black lint-flake lint-mypy ## runs all static analysis tools
+lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests

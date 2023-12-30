@@ -134,8 +134,7 @@ Distributed under the MIT License. See [LICENSE.md](./LICENSE.md) for more infor
 
 ## Contact
 
-Fritz, [{{cookiecutter.mastodon_handle}}]({{cookiecutter.mastodon_url}})
-
-Project Link: [https://github.com/gotofritz/german-learning](https://github.com/gotofritz/german-learning)
+Github Profile: [https://github.com/{{cookiecutter.github_username}}](https://github.com/{{cookiecutter.github_username}})
+Email: [{{cookiecutter.email}}](mailto:{{cookiecutter.email}})
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

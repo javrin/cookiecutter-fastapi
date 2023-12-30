@@ -1,4 +1,4 @@
-PYTHON_VERSION ?= 3.10.4
+PYTHON_VERSION ?= {{cookiecutter.python_version}}
 CMD := poetry run
 SRC_DIR := src
 TESTS_DIR := tests
@@ -12,26 +12,26 @@ format: ## rewrites code with black and isort
 	$(CMD) isort $(SRC_DIR) $(TESTS_DIR)
 .PHONY: format
 
-lint-black: ## checks src and tests with mypy
+lint-black: ## checks src and tests with black
 	$(CMD) black --check --fast $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-black
 
-lint-flake: ## checks src and tests with mypy
-	$(CMD) flakeheaven lint $(SRC_DIR) $(TESTS_DIR)
-.PHONY: lint-flake
+lint-ruff: ## checks src and tests with ruff
+	$(CMD) ruff check $(SRC_DIR) $(TESTS_DIR)
+.PHONY: lint-ruff
 
 lint-mypy: ## checks type annotation
 	$(CMD) mypy $(SRC_DIR)
 .PHONY: lint-mypy
 
-lint: lint-black lint-flake lint-mypy ## runs all static analysis tools
+lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
 	$(CMD) pytest --cov=src --cov-report html:tests/.coverage $(TESTS_DIR)
 .PHONY: test
 
-safety: ## tests third part packages against a database of known compromised ones
+safety: ## tests third party packages against a database of known compromised ones
 	poetry export --with dev --format=requirements.txt --without-hashes | poetry run safety check --stdin
 
 qa: safety lint test ## for CI/CD. Runs all code quality tools
