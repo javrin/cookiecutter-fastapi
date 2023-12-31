@@ -27,7 +27,7 @@ warn_return_any = true
 warn_unused_configs = true
 exclude = "tests"
 
-[tools.pytest]
+[tool.pytest]
 norecursedirs = "{{cookiecutter.directory_name}}"
 
 [tool.pytest.ini_options]

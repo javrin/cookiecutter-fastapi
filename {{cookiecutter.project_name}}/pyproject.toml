@@ -18,8 +18,8 @@ pytest = "^7.3.1"
 pytest-sugar = "^0.9.5"
 pytest-clarity = "^1.0.1"
 pytest-random-order = "^1.0.4"
-coverage = {extras = ["toml"], version = "^6.4.4"}
 pytest-cov = "^3.0.0"
+coverage = {extras = ["toml"], version = "^6.4.4"}
 safety = "^2.1.1"
 black = "^22.8.0"
 ruff = "^0.0.270"
@@ -52,9 +52,6 @@ exclude_lines = [
   # "if typing.TYPE_CHECKING:"
   "if platform.system()",
 ]
-
-[tool.coverage.html]
-directory = "cov_html"
 
 [tool.pytest.ini_options]
 pythonpath = ["src"]
