@@ -1,12 +1,7 @@
 # Changelog
 
-## v1.0.0
+## {{cookiecutter.version}}
 
 ### Added or Changed
 
-- This
-- That
-
-### Removed
-
-- Oh that one
+- Generate project with cookiecutter
