@@ -5,7 +5,6 @@ function pause(){
   echo ""
 }
 
-# export POETRY_VIRTUALENVS_IN_PROJECT=true
 pyenv local
 poetry config warnings.export false
 poetry install --no-root
