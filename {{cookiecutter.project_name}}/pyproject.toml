@@ -7,13 +7,15 @@ readme = "README.md"
 license = "MIT"
 homepage = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_name}}"
 repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_name}}"
-packages = [{include = "{{cookiecutter.package_name}}", from = "src"}]
+packages = [{include = "{{cookiecutter.package_name}}"}]
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.python_version}}"
+python-dotenv = "^1.0.0"
+starlette = "^0.34.0"
+uvicorn = "^0.25.0"
 
 [tool.poetry.group.dev.dependencies]
-python-dotenv = "^1.0.0"
 pytest = "^7.3.1"
 pytest-sugar = "^0.9.5"
 pytest-clarity = "^1.0.1"
@@ -22,7 +24,7 @@ pytest-cov = "^3.0.0"
 coverage = {extras = ["toml"], version = "^6.4.4"}
 safety = "^2.1.1"
 black = "^22.8.0"
-ruff = "^0.0.270"
+ruff = "^0.1.9"
 isort = "^5.10.1"
 mypy = "^0.971"
 Faker = "^21.0.0"
@@ -31,12 +33,12 @@ Faker = "^21.0.0"
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
-[tool.coverage.paths]
-source = ["src"]
-
 [tool.coverage.run]
 branch = true
-source = ["{{cookiecutter.project_name}}"]
+source = [
+  "main",
+  "tests",
+]
 
 [tool.coverage.report]
 fail_under = 100
@@ -54,7 +56,6 @@ exclude_lines = [
 ]
 
 [tool.pytest.ini_options]
-pythonpath = ["src"]
 testpaths = [
     "tests",
 ]

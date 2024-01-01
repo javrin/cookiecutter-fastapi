@@ -1,6 +1,5 @@
 PYTHON_VERSION ?= {{cookiecutter.python_version}}
 CMD := poetry run
-SRC_DIR := src
 TESTS_DIR := tests
 
 help:  ## Display this help
@@ -8,27 +7,27 @@ help:  ## Display this help
 .PHONY: help
 
 format: ## rewrites code with black and isort
-	$(CMD) black $(SRC_DIR) $(TESTS_DIR)
-	$(CMD) isort $(SRC_DIR) $(TESTS_DIR)
+	$(CMD) black main.py $(TESTS_DIR)
+	$(CMD) isort main.py $(TESTS_DIR)
 .PHONY: format
 
 lint-black: ## checks src and tests with black
-	$(CMD) black --check --fast $(SRC_DIR) $(TESTS_DIR)
+	$(CMD) black --check --fast main.py $(TESTS_DIR)
 .PHONY: lint-black
 
 lint-ruff: ## checks src and tests with ruff
-	$(CMD) ruff check $(SRC_DIR) $(TESTS_DIR)
+	$(CMD) ruff check main.py $(TESTS_DIR)
 .PHONY: lint-ruff
 
 lint-mypy: ## checks type annotation
-	$(CMD) mypy $(SRC_DIR)
+	$(CMD) mypy main.py
 .PHONY: lint-mypy
 
 lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
-	$(CMD) pytest --cov=src --cov-report html:tests/.coverage $(TESTS_DIR)
+	$(CMD) pytest --cov=main.py --cov-report html:tests/.coverage $(TESTS_DIR)
 .PHONY: test
 
 safety: ## tests third party packages against a database of known compromised ones
@@ -39,3 +38,11 @@ qa: safety lint test ## for CI/CD. Runs all code quality tools
 
 qa-local: format qa ## for local development (before checking in). Formats code and runs qa
 .PHONY: qa-local
+
+serve: ## runs the app
+	docker compose -f docker-compose.yml up
+.PHONY: serve
+
+debug: ## runs the app in debug mode
+	docker compose -f docker-compose-debug.yml up
+.PHONY: debug

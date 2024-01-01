@@ -1,6 +1,6 @@
 # Changelog
 
-## {{cookiecutter.version}}
+## {{cookiecutter.project_version}}
 
 ### Added or Changed
 

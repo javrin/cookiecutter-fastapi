@@ -1,3 +1,4 @@
+{%- set version_parts = cookiecutter.python_version.split(".") -%}
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 <a name="readme-top"></a>
@@ -69,18 +70,17 @@
 
 ## Getting Started
 
-This is a standard Python project that runs on the CLI.
+This is a Python project that runs a Flask server.
 
 ### Prerequisites
 
-- python >= 3.10 (it will probably work with lower versions, but I haven't tested it)
+{{ "- python >= " + version_parts[0] + "." + version_parts[1] + " (it will probably work with lower versions, but I haven't tested it)" | indent(2) }}
 - poetry >= 1.2
 
 ### Installation
 
-1. Install dependencies `> poetry install && poetry shell`
-1. Install the language model `> python -m spacy download de_core_news_sm`
-1. Run with [TODO]
+1. Install dependencies `> poetry install --no-root`
+2. Run with [TODO]
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
