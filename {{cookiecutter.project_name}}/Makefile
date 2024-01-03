@@ -27,7 +27,7 @@ lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
-	$(CMD) pytest --cov=main.py --cov-report html:tests/.coverage $(TESTS_DIR)
+	$(CMD) pytest --cov=main --cov-report html:tests/.coverage $(TESTS_DIR)
 .PHONY: test
 
 safety: ## tests third party packages against a database of known compromised ones

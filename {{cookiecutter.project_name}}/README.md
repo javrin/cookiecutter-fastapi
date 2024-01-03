@@ -74,13 +74,18 @@ This is a Python project that runs a Flask server.
 
 ### Prerequisites
 
-{{ "- python >= " + version_parts[0] + "." + version_parts[1] + " (it will probably work with lower versions, but I haven't tested it)" | indent(2) }}
-- poetry >= 1.2
+{{ "- python >= " + version_parts[0] + "." + version_parts[1] + " (it will probably work with lower versions, but I haven't tested it)" }}
+- poetry >= 1.7.1
 
-### Installation
+### Installation (manual)
 
-1. Install dependencies `> poetry install --no-root`
-2. Run with [TODO]
+Install dependencies
+
+  poetry install --no-root --no-dev
+
+Run with
+
+  poetry run make serve
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
