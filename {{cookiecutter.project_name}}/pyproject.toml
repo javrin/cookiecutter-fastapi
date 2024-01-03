@@ -28,6 +28,7 @@ ruff = "^0.1.9"
 isort = "^5.10.1"
 mypy = "^0.971"
 Faker = "^21.0.0"
+httpx = "^0.26.0"
 
 [build-system]
 requires = ["poetry-core"]
