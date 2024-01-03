@@ -6,10 +6,8 @@ function pause(){
 }
 
 pyenv local
-poetry config warnings.export false
 poetry install --no-root
 poetry env info
-poetry export --only main --without-hashes -o requirements.txt
 # Windows compatibility (`poetry env info --executable` returns the path with \ instead of / even if running gitbash)
 EXECUTABLE=$(poetry run python -c "import sys, pathlib; print(pathlib.Path(sys.executable).as_posix())")
 sed -i.bak "/<interpreter_path>/ s#<interpreter_path>#$EXECUTABLE#" \
