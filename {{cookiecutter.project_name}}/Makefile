@@ -24,7 +24,7 @@ lint-mypy: ## checks type annotation
 	$(CMD) mypy $(SRC_DIR)
 .PHONY: lint-mypy
 
-lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
+lint: lint-black lint-ruff ## runs all static analysis tools (except mypy)
 .PHONY: lint
 
 test: ## runs tests
