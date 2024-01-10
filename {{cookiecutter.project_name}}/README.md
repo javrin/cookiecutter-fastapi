@@ -70,7 +70,7 @@
 
 ## Getting Started
 
-This is a Python project that runs a Flask server.
+This is a Python project that runs a Starlette server.
 
 ### Prerequisites
 
