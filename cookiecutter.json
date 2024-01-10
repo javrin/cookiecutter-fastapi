@@ -1,5 +1,5 @@
 {
-  "project_name": "new-starlette-project",
+  "project_name": "new-fastapi-project",
   "package_name": "{{ cookiecutter.project_name | slugify(separator='_') }}",
   "verbose_project_name": "My Awesome Project",
   "full_name": "Your Name",

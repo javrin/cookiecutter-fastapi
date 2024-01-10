@@ -70,7 +70,7 @@
 
 ## Getting Started
 
-This is a Python project that runs a Starlette server.
+This is a Python project that runs a FastAPI server.
 
 ### Prerequisites
 

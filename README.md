@@ -1,11 +1,11 @@
-# cookiecutter-starlette
+# cookiecutter-fastapi
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 
-A minimal cookiecutter template for a starlette app based on cookiecutter-python, which is originally based on cookiecutter-gotofritz-poetry. See [the blog post][] for more.
+A minimal cookiecutter template for a FastAPI app based on cookiecutter-python, which is originally based on cookiecutter-gotofritz-poetry. See [the blog post][] for more.
 
 **Tweaks**
 
-- Template generates a starlette project with dependencies managed by poetry
+- Template generates a fastapi project with dependencies managed by poetry
 
 [the blog post]: https://gotofritz.net/blog/creating-a-poetry-driven-python-project-template-with-cookiecutter/#step-3-push-to-github-and-test
