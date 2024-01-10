@@ -6,10 +6,13 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-
+      # Uncomment below to specify versions
+      # args:
+      #   PYTHON_VERSION:
+      #   POETRY_VERSION:
+      target: production
+    image: {{cookiecutter.project_name}}-web:prod
     # This overrides the CMD in the Dockerfile
     command: uvicorn main:app --host 0.0.0.0 --port 8000
     ports:
       - 8000:8000
-    volumes:
-      - .:/app

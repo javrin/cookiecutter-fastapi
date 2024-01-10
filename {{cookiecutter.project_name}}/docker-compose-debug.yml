@@ -6,17 +6,19 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-
+      # Uncomment below to specify versions
+      # args:
+      #   PYTHON_VERSION:
+      #   POETRY_VERSION:
+      target: development
+    image: {{cookiecutter.project_name}}-web:dev
     # This overrides the CMD in the Dockerfile
-    command: 
+    command:
       - "sh"
       - "-c"
       - |
-        pip3 install --disable-pip-version-check --no-cache-dir debugpy -t /tmp && \
-        python /tmp/debugpy --wait-for-client --listen 0.0.0.0:5678 \
-        -m uvicorn main:app --host 0.0.0.0 --port 8000
+        poetry add debugpy &&
+        poetry run python -m debugpy --listen 0.0.0.0:5678 --wait-for-client -m uvicorn main:app --host 0.0.0.0 --port 8000
     ports:
       - 8000:8000
       - 5678:5678
-    volumes:
-      - .:/app
