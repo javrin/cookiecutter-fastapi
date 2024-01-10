@@ -49,7 +49,7 @@ COPY . .
 
 EXPOSE 8000
 
-CMD ["tail", "-f", "/dev/null"]
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--reload", "--port", "8000"]
 
 ###############################################################################
 # PRODUCTION RUNTIME STAGE - Final image used in production
