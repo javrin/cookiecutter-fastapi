@@ -16,7 +16,6 @@ rm .vscode/settings.json.bak
 git init
 git add .
 git commit -m "Generate project with cookiecutter"
-touch .env
 
 # For debugging
 # pause
