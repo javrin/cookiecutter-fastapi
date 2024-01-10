@@ -1,12 +1,10 @@
-import json
+from fastapi import FastAPI
 
-from starlette.applications import Starlette
-
-from main import __version__
+from src.main import __version__
 
 
 def test_app_instantiation(client):
-    assert isinstance(client.app, Starlette)
+    assert isinstance(client.app, FastAPI)
 
 
 def test_version_number():
@@ -24,7 +22,7 @@ def test_homepage_json_response_content(client):
     expected_response_body = {"hello": "world"}
 
     # JSONResponse returns text as string so we need to parse it into json format
-    actual_response_body = json.loads(response.text)
+    actual_response_body = response.json()
 
     # Assert that both responses match.
     assert actual_response_body == expected_response_body

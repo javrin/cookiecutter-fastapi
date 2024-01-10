@@ -1,8 +1,8 @@
 import pytest
 from faker import Faker
-from starlette.testclient import TestClient
+from fastapi.testclient import TestClient
 
-from main import app
+from src.main import app
 
 fake = Faker()
 Faker.seed(1369)
@@ -16,4 +16,5 @@ def fixture_fake():
 
 @pytest.fixture(name="client")
 def fixture_client():
-    return TestClient(app)
+    with TestClient(app) as test_client:
+        yield test_client

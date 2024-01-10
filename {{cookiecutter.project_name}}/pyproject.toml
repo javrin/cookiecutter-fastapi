@@ -7,12 +7,12 @@ readme = "README.md"
 license = "MIT"
 homepage = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_name}}"
 repository = "https://github.com/{{cookiecutter.github_username}}/{{cookiecutter.project_name}}"
-packages = [{include = "{{cookiecutter.package_name}}"}]
+packages = [{include = "{{cookiecutter.package_name}}", from = "src"}]
 
 [tool.poetry.dependencies]
 python = "^{{cookiecutter.python_version}}"
-python-dotenv = "^1.0.0"
-starlette = "^0.34.0"
+fastapi = "^0.108.0"
+pydantic-settings = "^2.1.0"
 uvicorn = "^0.25.0"
 
 [tool.poetry.group.dev.dependencies]

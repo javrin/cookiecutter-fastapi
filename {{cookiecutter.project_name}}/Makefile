@@ -1,4 +1,5 @@
 PYTHON_VERSION ?= {{cookiecutter.python_version}}
+SRC_DIR := src
 CMD := poetry run
 TESTS_DIR := tests
 
@@ -7,27 +8,27 @@ help:  ## Display this help
 .PHONY: help
 
 format: ## rewrites code with black and isort
-	$(CMD) black main.py $(TESTS_DIR)
-	$(CMD) isort main.py $(TESTS_DIR)
+	$(CMD) black $(SRC_DIR) $(TESTS_DIR)
+	$(CMD) isort $(SRC_DIR) $(TESTS_DIR)
 .PHONY: format
 
 lint-black: ## checks src and tests with black
-	$(CMD) black --check --fast main.py $(TESTS_DIR)
+	$(CMD) black --check --fast $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-black
 
 lint-ruff: ## checks src and tests with ruff
-	$(CMD) ruff check main.py $(TESTS_DIR)
+	$(CMD) ruff check $(SRC_DIR) $(TESTS_DIR)
 .PHONY: lint-ruff
 
 lint-mypy: ## checks type annotation
-	$(CMD) mypy main.py
+	$(CMD) mypy $(SRC_DIR)
 .PHONY: lint-mypy
 
 lint: lint-black lint-ruff lint-mypy ## runs all static analysis tools
 .PHONY: lint
 
 test: ## runs tests
-	$(CMD) pytest --cov=main --cov-report html:tests/.coverage $(TESTS_DIR)
+	$(CMD) pytest --cov=src --cov-report html:tests/.coverage $(TESTS_DIR)
 .PHONY: test
 
 safety: ## tests third party packages against a database of known compromised ones
