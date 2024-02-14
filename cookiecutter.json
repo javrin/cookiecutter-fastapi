@@ -2,11 +2,12 @@
   "project_name": "new-fastapi-project",
   "package_name": "{{ cookiecutter.project_name | slugify(separator='_') }}",
   "verbose_project_name": "My Awesome Project",
+  "project_description": "This is my awesome project",
   "full_name": "Your Name",
   "github_username": "Your_Github_Name",
   "email": "{{cookiecutter.github_username}}@users.noreply.github.com",
-  "project_description": "This is my awesome project",
   "python_version": "3.10.11",
+  "poetry_version": "1.7.1",
   "project_version": "0.1.0",
   "line_length": "120"
 }

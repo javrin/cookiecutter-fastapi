@@ -1,4 +1,4 @@
-{%- set version_parts = cookiecutter.python_version.split(".") -%}
+{%- set py_version_parts = cookiecutter.python_version.split(".") -%}
 <!-- Improved compatibility of back to top link: See: https://github.com/othneildrew/Best-README-Template/pull/73 -->
 
 <a name="readme-top"></a>
@@ -74,8 +74,8 @@ This is a Python project that runs a FastAPI server.
 
 ### Prerequisites
 
-{{ "- python >= " + version_parts[0] + "." + version_parts[1] + " (it will probably work with lower versions, but I haven't tested it)" }}
-- poetry >= 1.7.1
+- python >= {{py_version_parts[0]}}.{{py_version_parts[1]}} (it will probably work with lower versions, but I haven't tested it)
+- poetry >= {{cookiecutter.poetry_version}}
 
 ### Installation (manual)
 
