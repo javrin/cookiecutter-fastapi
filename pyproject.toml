@@ -37,7 +37,7 @@ addopts = [
 ]
 
 [tool.black]
-line_length = 120
+line-length = 120
 include = '\.pyi?$'
 
 [tool.isort]

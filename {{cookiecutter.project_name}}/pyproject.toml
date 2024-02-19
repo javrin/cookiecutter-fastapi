@@ -78,7 +78,7 @@ line_length = {{cookiecutter.line_length}}
 use_parentheses = true
 
 [tool.black]
-line_length = {{cookiecutter.line_length}}
+line-length = {{cookiecutter.line_length}}
 include = '\.pyi?$'
 
 [tool.ruff]
